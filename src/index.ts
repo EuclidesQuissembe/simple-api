@@ -1,14 +1,21 @@
+/**
+ * Modules
+ */
 import express from "express";
 const app = express();
 
-app.get("/", (_, res) => {
-  res.send({
-    message: "Simple API with TypeScript and Express",
-  });
-});
+// Support
+import routes from "./routes";
 
+// Config
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+// Routes
+app.use(routes);
+
+// Port
 const port = process.env.PORT || 3000;
 
-app.listen(port, () => {
-  console.log(`App listening on PORT ${port}`);
-});
+// Listening
+app.listen(port);
