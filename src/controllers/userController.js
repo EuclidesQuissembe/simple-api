@@ -1,19 +1,39 @@
-const users = [
-  {
-    id: 1,
-    name: "Euclides Bernardo",
-    email: "euclides.bernardo@nzooji.com",
-    age: 20,
-  },
-  {
-    id: 2,
-    name: "Raúl Inácio",
-    email: "raul.inacio@nzooji.com",
-    age: 21,
-  },
-];
+const { users } = require("../__fake_data__/users");
+const { contacts } = require("../__fake_data__/contacts");
 
-const index = (_, res) => {
+const index = (req, res) => {
+  if (req.query.includes) {
+    const includes = req.query.includes;
+    const filter = {
+      contacts: () => {
+        return users.map((user) => {
+          const contact = contacts.filter((c) => c.user_id === user.id);
+
+          return (user = {
+            ...user,
+            contacts: contact,
+          });
+        });
+      },
+    };
+
+    let data = null;
+
+    try {
+      data = filter[includes]();
+    } catch (err) {
+      if (!data) {
+        res
+          .status(200)
+          .send({ success: false, message: "Relacionamento não encontrado" });
+      }
+      return;
+    }
+
+    res.status(200).send({ success: true, data });
+    return;
+  }
+
   res.status(200).send({ success: true, data: users });
 };
 
@@ -72,4 +92,14 @@ const update = (req, res) => {
   res.status(200).send({ success: true, data: user });
 };
 
-module.exports = { index, show, store, update };
+const userContacts = (req, res) => {
+  const { id } = req.params;
+
+  const user = users.find((user) => user.id === id);
+
+  const data = contacts.filter((contact) => contact.user_id === 1);
+
+  res.status(200).send({ success: true, data });
+};
+
+module.exports = { index, show, store, update, contacts: userContacts };
