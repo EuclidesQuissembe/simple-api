@@ -9,5 +9,10 @@ API with TS and NodeJS
 1. Switch to branch develop `git checkout develop`
 1. Create your branch for implement new feature to the project `git checkout -b feature/<your_branch_name_here>`
 1. Install dependencies `yarn` or `npm install`
+1. Copy the environment file `cp .env.example .env`
 1. Run the project `yarn dev` or `npm run dev`
 1. The project is running on localhost:3000
+
+### Testing API
+
+- [API na Heroku](https://nzooji-simple-api.herokuapp.com)
