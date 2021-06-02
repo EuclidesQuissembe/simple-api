@@ -9,4 +9,6 @@ router.get("/users/:id", userController.show);
 router.post("/users", userController.store);
 router.put("/users/:id", userController.update);
 
+router.get("/users/:id/contacts", userController.contacts);
+
 module.exports = router;
