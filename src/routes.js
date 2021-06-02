@@ -1,9 +1,13 @@
-import { Router } from "express";
+const { Router } = require("express");
+
+// Controllers
+const users = require("./routes/users.js");
 
 const router = Router();
 
 /**
  * Routes
  */
+router.use(users);
 
-export default router;
+module.exports = router;

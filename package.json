@@ -4,6 +4,8 @@
   "description": "Simple API with Express and Mongodb",
   "main": "src/index.js",
   "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv-safe": "^8.2.0",
     "express": "^4.17.1"
   },
   "scripts": {
